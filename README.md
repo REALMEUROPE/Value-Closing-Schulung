@@ -1,527 +1,398 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Realm Germany – Value-Closing-Schulung (Abschluss-Meisterschaft)</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue-deep:#0B3D6B;
-  --green-dark:#1A6B4A;
-  --green-mid:#059669;
-  --green-light:#ECFDF5;
-  --amber:#F59E0B;
-  --red:#DC2626;
-  --bg:#F0F2F5;
-  --card:#FFFFFF;
-  --border:#E5E7EB;
-  --text:#1A1A1A;
-  --muted:#6B7280;
-  --subtle:#F9FAFB;
-}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-
-/* ── HERO ── */
-.hero{background:linear-gradient(135deg,#071f38 0%,var(--blue-deep) 45%,var(--green-dark) 100%);color:#fff;padding:4rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-.hero-badge{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.25rem;backdrop-filter:blur(4px)}
-.hero h1{font-size:clamp(24px,5vw,42px);font-weight:800;margin-bottom:.75rem;line-height:1.15}
-.hero h1 span{color:#6EE7B7}
-.hero p{font-size:15px;opacity:.8;max-width:640px;margin:0 auto 2rem}
-.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
-.hstat{text-align:center}
-.hstat .val{font-size:28px;font-weight:800;color:#6EE7B7}
-.hstat .lbl{font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
-
-/* ── NAV ── */
-.nav-wrap{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.06)}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 1rem;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
-.nav-inner::-webkit-scrollbar{display:none}
-.nav-item{flex-shrink:0;padding:.875rem 1.1rem;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
-.nav-item:hover{color:var(--text);background:var(--subtle)}
-.nav-item.active{color:var(--green-dark);border-bottom-color:var(--green-dark)}
-
-/* ── LAYOUT ── */
-.page{max-width:1200px;margin:0 auto;padding:2rem 1rem}
-.section{display:none;animation:fadeIn .3s ease}
-.section.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── CARDS ── */
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:1.5rem}
-.card-title{font-size:22px;font-weight:800;margin-bottom:1.25rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);padding-bottom:0.75rem}
-.card-title .ico{font-size:26px}
-h3{font-size:18px;font-weight:700;margin:1.75rem 0 .75rem;color:var(--blue-deep);display:flex;align-items:center;gap:6px}
-h4{font-size:15px;font-weight:700;margin:1.25rem 0 .5rem;color:var(--text)}
-p{font-size:14.5px;line-height:1.8;color:#374151;margin-bottom:1rem}
-ul,ol{padding-left:1.5rem;margin-bottom:1rem}
-li{font-size:14.5px;line-height:1.75;color:#374151;margin-bottom:.3rem}
-strong{color:var(--text)}
-
-/* ── HIGHLIGHT BOX ── */
-.hl{background:var(--green-light);border-left:4px solid var(--green-mid);border-radius:0 10px 10px 0;padding:1.1rem;margin:1.25rem 0;font-size:14px;line-height:1.75}
-.hl-amber{background:#FFFBEB;border-left-color:var(--amber)}
-.hl-red{background:#FEF2F2;border-left-color:var(--red)}
-.hl-blue{background:#EFF6FF;border-left-color:#3B82F6}
-.hl strong{display:block;margin-bottom:5px;font-size:15px;color:var(--text)}
-
-/* ── CODE / SCRIPT BOX ── */
-.script-box{background:#F8FAFC;border:1px dashed #CBD5E1;border-radius:8px;padding:1.25rem;margin:1rem 0;font-family:inherit}
-.script-tag{display:inline-block;background:#E2E8F0;color:#475569;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;margin-bottom:0.5rem}
-
-/* ── COMPARE TABLE ── */
-.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.25rem 0}
-.vs-card{border-radius:12px;padding:1.25rem;border:2px solid transparent}
-.vs-realm{background:var(--green-light);border-color:var(--green-mid)}
-.vs-comp{background:#F9FAFB;border-color:var(--border)}
-.vs-card h4{font-size:15px;font-weight:800;margin-bottom:.75rem;color:var(--blue-deep)}
-.vs-card ul{padding-left:1.2rem;margin:0}
-.vs-card li{font-size:13.5px;margin-bottom:4px}
-
-/* ── QUIZ ── */
-.quiz-box{background:var(--subtle);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-top:2rem}
-.quiz-box h3{font-size:18px;font-weight:800;margin-bottom:.25rem;color:var(--blue-deep)}
-.quiz-box .qsub{font-size:14px;color:var(--muted);margin-bottom:1.5rem}
-.qitem{margin-bottom:2rem}
-.qitem .qt{font-size:15px;font-weight:600;margin-bottom:.75rem;line-height:1.6}
-.qopt{display:flex;align-items:flex-start;gap:11px;background:#fff;border:1.5px solid var(--border);border-radius:9px;padding:.75rem 1rem;cursor:pointer;margin-bottom:8px;font-size:14px;color:#374151;width:100%;text-align:left;line-height:1.5;transition:all .15s}
-.qopt:hover{border-color:#9CA3AF;background:var(--subtle)}
-.qopt .qdot{width:16px;height:16px;border:2px solid #D1D5DB;border-radius:50%;flex-shrink:0;margin-top:2px;transition:all .15s}
-.qopt.correct{background:var(--green-light);border-color:var(--green-mid);color:#065F46}
-.qopt.correct .qdot{background:var(--green-mid);border-color:var(--green-mid)}
-.qopt.wrong{background:#FEF2F2;border-color:var(--red);color:#7F1D1D}
-.qopt.wrong .qdot{background:var(--red);border-color:var(--red)}
-.qopt.locked{pointer-events:none}
-.qfb{display:none;font-size:13px;line-height:1.6;padding:.75rem 1.1rem;border-radius:8px;margin-top:.5rem}
-.qfb.show{display:block}
-.qfb.ok{background:var(--green-light);color:#065F46;border:1px solid #A7F3D0}
-.qfb.err{background:#FEF2F2;color:#7F1D1D;border:1px solid #FECACA}
-.quiz-score{display:none;background:#fff;border-radius:10px;padding:2rem;text-align:center;margin-top:1.5rem;border:1px solid var(--border)}
-.quiz-score.show{display:block}
-.quiz-score .qs-val{font-size:44px;font-weight:800;color:var(--green-dark)}
-.quiz-score .qs-lbl{font-size:14px;color:var(--muted)}
-.name-row{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:.75rem 1rem;margin-bottom:2rem}
-.name-row label{font-size:14px;font-weight:700;white-space:nowrap;color:var(--green-dark)}
-.name-row input{flex:1;border:none;background:transparent;font-size:14px;color:var(--text);outline:none}
-.name-row input::placeholder{color:var(--muted)}
-
-/* ── PROGRESS & BUTTONS ── */
-.nav-btns{display:flex;justify-content:space-between;margin-top:2.5rem;gap:12px}
-.btn{padding:.75rem 1.5rem;border-radius:10px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:var(--text);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn:hover{background:var(--subtle);border-color:#9CA3AF}
-.btn-primary{background:linear-gradient(135deg,var(--blue-deep),var(--green-dark));color:#fff;border-color:transparent}
-.btn-primary:hover{opacity:.9}
-.sect-progress{background:var(--border);border-radius:8px;height:6px;margin-bottom:2.5rem}
-.sect-progress-fill{background:linear-gradient(90deg,var(--blue-deep),var(--green-dark));border-radius:8px;height:6px;transition:width .5s}
-
-@media(max-width:768px){
-  .vs-grid{grid-template-columns:1fr}
-  .hero-stats{gap:1.5rem}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2B Abschluss-Meisterschaft | Schulungs-Dashboard</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background: #f4f4f4; }
+        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .script-box { background: #e7f3ff; padding: 15px; border-left: 4px solid #007bff; margin: 10px 0; font-style: italic; }
+        .module-title { color: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
 </head>
 <body>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">Realm Germany · Phase 3 Masterclass</div>
-  <h1>Phase 3: Die <span>Value-Closing-Schulung</span></h1>
-  <p>Das vollständige 7-Module-System zur psychologischen Abschluss-Meisterschaft im Investitionsgüter- und High-Ticket B2B-Vertrieb. Konzipiert für eine Bearbeitungszeit von ca. 45 Minuten.</p>
-  <div class="hero-stats">
-    <div class="hstat"><div class="val">7</div><div class="lbl">Spezial-Module</div></div>
-    <div class="hstat"><div class="val">45 min</div><div class="lbl">Intensiv-Fokus</div></div>
-    <div class="hstat"><div class="val">B2B</div><div class="lbl">Enterprise ROI</div></div>
-    <div class="hstat"><div class="val">100%</div><div class="lbl">Praxis-Skripte</div></div>
-  </div>
-</div>
-
-<!-- NAV -->
-<div class="nav-wrap">
-  <div class="nav-inner">
-    <div class="nav-item active" onclick="goSec(0)">M1-M2: Einwand-Isolation</div>
-    <div class="nav-item" onclick="goSec(1)">M3-M4: Value-Pricing &amp; ROI</div>
-    <div class="nav-item" onclick="goSec(2)">M5-M6: Closing &amp; Einwände</div>
-    <div class="nav-item" onclick="goSec(3)">M7: Finaler Vertrag &amp; Prüfung</div>
-  </div>
-</div>
-
-<div class="page">
-
-<!-- ══════════════════════════════ SECTION 0 (M1-M2) ══ -->
-<div class="section active" id="sec0">
-  <div class="sect-progress"><div class="sect-progress-fill" style="width:25%"></div></div>
-
-  <!-- MODUL 1 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">🔍</span>Modul 1: Die Psychologie des B2B-Zögerns &amp; Vorwands-Erkennung</div>
-    <p>Im gehobenen B2B-Vertrieb, insbesondere bei der Veräußerung von kapitalintensiven Investitionsgütern wie industriellen Energiesystemen, Großmaschinen oder Enterprise-Software, gleicht kein Einwand dem anderen. Bevor ein Verkäufer argumentativ kontert, muss er verstehen, was sich auf psychologischer Ebene beim Gegenüber abspielt.</p>
-    
-    <div class="hl hl-blue">
-      <strong>Die Ursache von Widerstand: Risiko-Aversion</strong>
-      Ein B2B-Entscheider (z. B. technischer Leiter, CFO, Geschäftsführer) kauft nicht nur ein Produkt – er setzt seine teaminterne Reputation, sein Budget und im schlimmsten Fall seinen Arbeitsplatz aufs Spiel. Der Einwand ist daher primär ein unbewusster Schutzmechanismus gegen potenzielles Versagen.
+<!-- Inhalt Modul: High-Ticket Einwandbehandlung -->
+<div id="mod-einwand" class="content-section">
+    <div class="card">
+        <h2 class="module-title">Value-Closing: Abschluss-Meisterschaft</h2>
+        <p><strong>Fokus:</strong> Einwände isolieren, Vorwände entlarven, Premium-Preis verteidigen.</p>
+        
+        <h3>1. Das Mindset: Einwand vs. Vorwand</h3>
+        <p>Ein Einwand ist kein „Nein“ zum Produkt, sondern ein Hilferuf nach Sicherheit. Wer hohe Summen investiert, fürchtet Fehlentscheidungen.</p>
+        
+        <div class="script-box">
+            <strong>Die Isolations-Methode:</strong><br>
+            „Herr/Frau [Name], einmal angenommen, das Budget wäre für diesen Moment gar kein Thema und vollkommen freigegeben... gäbe es dann noch einen anderen Grund, warum wir das Projekt nicht gemeinsam umsetzen?“
+        </div>
     </div>
 
-    <h3>Der fundamentale Unterschied: Einwand vs. Vorwand</h3>
-    <p>Wer einen Vorwand wie einen echten Einwand behandelt, verliert das Gespräch durch informationelle Überfütterung. Ein **Echter Einwand** basiert auf realen, harten Fakten (z. B. unpassende physische Gegebenheiten in der Produktionshalle). Ein **Vorwand** hingegen ist ein emotionales Schutzschild, um die wahre Unsicherheit nicht offenlegen zu müssen.</p>
-
-    <div class="vs-grid">
-      <div class="vs-card vs-comp">
-        <h4>Vorwand (Emotionales Schutzschild)</h4>
+    <div class="card">
+        <h2 class="module-title">2. Das L-A-E-V-Framework</h2>
         <ul>
-          <li>„Schicken Sie mal Unterlagen, ich schau mir das an.“</li>
-          <li>„Wir haben aktuell absolut keine Zeit.“</li>
-          <li>„Das Budget ist für dieses Jahr komplett dicht.“</li>
-          <li><em>Ziel des Kunden:</em> Höfliche Flucht aus der Verbindlichkeit.</li>
+            <li><strong>Lauschen & Atmen:</strong> 2 Sekunden Pause. Nicht kontern!</li>
+            <li><strong>Anerkennen:</strong> Druck rausnehmen („Ich verstehe Ihre Skepsis bei dieser Summe...“).</li>
+            <li><strong>Ergründen & Isolieren:</strong> Den wahren Grund finden.</li>
+            <li><strong>Verändern & Lösen:</strong> Perspektivwechsel & Abschlussbrücke.</li>
         </ul>
-      </div>
-      <div class="vs-card vs-realm">
-        <h4>Echter Einwand (Reale Barriere)</h4>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">3. Elite-Skripte für B2B-Einwände</h2>
+        
+        <h4>Einwand: „Sie sind zu teuer!“</h4>
+        <p><em>Strategie: ROI-Umdrehung.</em></p>
+        <div class="script-box">
+            „Suchen Sie nach der Anlage, die in der Anschaffung am billigsten ist, oder nach der, die über 5 Jahre die niedrigsten Gesamtkosten und höchste Ausfallsicherheit garantiert?“
+        </div>
+
+        <h4>Einwand: „Wir haben bereits einen Partner.“</h4>
+        <p><em>Strategie: Benchmark-Taktik.</em></p>
+        <div class="script-box">
+            „Macht es für Sie als Entscheider nicht Sinn, sich einen Zweit-Benchmark einzuholen? Wenn wir besser sind, haben Sie eine starke Alternative. Wenn nicht, haben Sie die Gewissheit, dass Ihr aktueller Partner Top-Leistung bringt.“
+        </div>
+
+        <h4>Einwand: „Keine Priorität / Nächstes Jahr.“</h4>
+        <p><em>Strategie: Cost of Inaction.</em></p>
+        <div class="script-box">
+            „Jeden Monat ohne diese Anlage verlieren Sie X € an Marge. Wollen Sie das Geld wirklich ein weiteres Jahr verbrennen, oder wollen wir den Schalter jetzt umlegen?“
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">4. Transfer-Aufgabe</h2>
+        <ol>
+            <li>Analysiere die letzten 3 stockenden Deals: War es ein Einwand oder ein Vorwand?</li>
+            <li>Schreibe ein individuelles Skript auf Basis der ROI- oder Benchmark-Taktik.</li>
+            <li>Übe das Skript 3-mal laut vor dem Spiegel (Tonfall: ruhig & partnerschaftlich).</li>
+        </ol>
+    </div>
+</div>
+<!-- Inhalt Modul 3.2: B2B Closing-Trigger -->
+<div id="mod-closing" class="content-section">
+    <div class="card">
+        <h2 class="module-title">Modul 3.2: B2B Closing-Trigger & Verbindlichkeit</h2>
+        <p><strong>Fokus:</strong> Entscheidungen herbeiführen, Ghosting verhindern, Abschluss auf Augenhöhe.</p>
+        <p><strong>Core Mindset:</strong> Abschluss ist ein Prozess, kein Event. Ein B2B-Entscheider unterschreibt, wenn das Risiko des Nicht-Handelns größer ist als das der Investition.</p>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Die 3 Frameworks für den Abschluss</h2>
+        
+        <h4>1. Implementation Blueprint (Fokus auf Zukunft)</h4>
+        <div class="script-box">
+            „Herr [Name], lassen Sie uns kurz den Zeitplan einloggen: Wenn wir das diese Woche abschließen, können unsere Ingenieure in KW [X] für das Kick-off da sein. Die Anlage ist dann pünktlich zum Quartalsstart am Netz. Spricht etwas gegen diesen Plan?“
+        </div>
+
+        <h4>2. Cost of Inaction (Verlustvermeidung)</h4>
+        <div class="script-box">
+            „Frau [Name], Ihre aktuelle Ineffizienz kostet Sie monatlich 6.500 €. Jede Woche Bedenkzeit verbrennt weiteres Kapital. Lassen Sie uns heute freigeben, um diesen Verlust ab Tag 1 zu stoppen. Sollen wir den Vertrag auf die Holding ausstellen?“
+        </div>
+
+        <h4>3. Alternative/Conditional (Kontrolle übergeben)</h4>
+        <div class="script-box">
+            „Um die Prozesse anzustoßen: Sollen wir Ihnen den Signatur-Link senden, oder stimmen wir das vorab mit Ihrer Rechtsabteilung ab? Welcher Weg ist für Sie effizienter?“
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Anti-Ghosting-Protokoll</h2>
+        <p><em>Kein Angebot ohne festen Folgetermin.</em></p>
+        <div class="script-box">
+            <strong>Das „No-Offer-Without-Date“ Skript:</strong><br>
+            „Ich möchte Sie nicht mit 20 Seiten Zahlenmaterial allein lassen. Lassen Sie uns direkt jetzt einen 15-Minuten-Termin für Dienstag 10:00 oder Donnerstag 14:00 Uhr vereinbaren, um das Angebot gemeinsam durchzugehen. Welcher Termin passt?“
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Transfer-Aufgabe</h2>
         <ul>
-          <li>„Unsere Deckenlast in Halle 3 trägt maximal 4 Tonnen.“</li>
-          <li>„Die Schnittstelle zu SAP S/4HANA muss zwingend stehen.“</li>
-          <li>„Der Aufsichtsrat sperrt Investitionen über 100k bis Q4.“</li>
-          <li><em>Ziel des Kunden:</em> Klärung von Machbarkeiten.</li>
+            <li><strong>Pipeline-Check:</strong> Bei wie vielen deiner Top-5-Angebote steht bereits ein fixer Termin zur Durchsprache im Kalender?</li>
+            <li><strong>Trockenübung:</strong> Formuliere das „Implementation Blueprint“-Closing für dein Hauptprodukt und übe die Tonalität, bis es wie der logische nächste Schritt klingt.</li>
         </ul>
-      </div>
     </div>
-  </div>
-
-  <!-- MODUL 2 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">⚡</span>Modul 2: Das 4-Stufen-Isolationsmodell im Live-Gespräch</div>
-    <p>Um Geisterjagd im Verkaufsgespräch zu vermeiden, wenden Realm-Berater das eiserne Prinzip der **Einwands-Isolation** an. Dadurch wird sichergestellt, dass nach der Entkräftung des Arguments keine neuen Ausflüchte nachgeschoben werden.</p>
-    
-    <h3>Die 4 Stufen der Isolation</h3>
-    <ol>
-      <li><strong>Verständnis &amp; Validierung:</strong> Druck aus dem Gespräch nehmen, dem Kunden Recht geben.</li>
-      <li><strong>Bedingte Isolationsfrage:</strong> Den Einwand hypothetisch auflösen, um zu sehen, was dahinter liegt.</li>
-      <li><strong>Suche nach versteckten Hürden:</strong> Sicherstellen, dass kein zweiter Faktor blockiert.</li>
-      <li><strong>Verbindliche Brücke:</strong> Das Gespräch exklusiv auf die Lösung dieser einen Hürde lenken.</li>
-    </ol>
-
-    <div class="script-box">
-      <div class="script-tag">Wort-für-Wort-Skript: Isolation bei Budget-Blockade</div>
-      <p><strong>Kunde:</strong> „Das klingt alles hochspannend, aber wir haben dafür dieses Jahr einfach kein Budget mehr frei.“</p>
-      <p><strong>Realm-Berater (Stufe 1):</strong> „Ich verstehe Sie vollkommen, Herr [Name]. Gerade in Zeiten volatiler Märkte hält man die Budgets extrem straff zusammen. Das zeigt einfach, wie verantwortungsvoll Sie wirtschaften.“</p>
-      <p><strong>Realm-Berater (Stufe 2 &amp; 3):</strong> „Wenn wir das Thema Budget für einen kurzen Moment komplett ausklammern und so tun, als läge die Freigabe bereits auf Ihrem Tisch... Wäre unser System dann von der Performance und den technischen Kennzahlen her exakt die Lösung, die Sie in Ihrer Produktion haben wollen?“</p>
-      <p><strong>Kunde:</strong> „Ja, technisch ist das genau das, was wir brauchen. Aber das Geld ist halt nicht da.“</p>
-      <p><strong>Realm-Berater (Stufe 4):</strong> „Verstanden. Das heißt, die Technik passt perfekt, und das einzige Nadelöhr, das uns noch von einer Zusammenarbeit trennt, ist die reine Liquiditäts- und Zahlungsstrukturierung für dieses Kalenderjahr? Wenn wir dafür eine Lösung finden, gehen wir das Projekt gemeinsam an, korrekt?“</p>
-    </div>
-  </div>
-
-  <div class="nav-btns">
-    <div></div>
-    <button class="btn btn-primary" onclick="goSec(1)">Weiter zu Modul 3 &amp; 4 →</button>
-  </div>
 </div>
-
-<!-- ══════════════════════════════ SECTION 1 (M3-M4) ══ -->
-<div class="section" id="sec1">
-  <div class="sect-progress"><div class="sect-progress-fill" style="width:50%"></div></div>
-
-  <!-- MODUL 3 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">💎</span>Modul 3: Die Realm Value-Pricing-Strategie (Kosten vs. Investition)</div>
-    <p>Wer Investitionsgüter über technische Datenblätter und Preisschilder verkauft, macht sich austauschbar und rutscht unweigerlich in den ruinösen Preiswettbewerb. Spitzenverkäufer rahmen den Preis von Anfang an anders: Sie verkaufen **Wertschöpfung und Risikominimierung**.</p>
-    
-    <h3>Das mathematische Prinzip der monetären Kontrastierung</h3>
-    <p>Ein Preis von 120.000 € für eine industrielle Wärmepumpen-Kaskade wirkt isoliert betrachtet hoch. Setzt man diesen Preis jedoch in Relation zu den kumulierten Verlusten einer verschleppten Modernisierung, schrumpft er psychologisch zusammen.</p>
-
-    <div class="hl hl-amber">
-      <strong>Die fundamentale Formel:</strong>
-      <p>Investitionspreis &lt; Kosten des aktuellen Zustands (Cost of Inaction) + Wert der neu gewonnenen Effizienz</p>
+<!-- Inhalt Modul 4.1: Strategisches Key Account Management -->
+<div id="mod-key-account" class="content-section">
+    <div class="card">
+        <h2 class="module-title">Modul 4.1: Strategisches Key Account Management & Up-Selling</h2>
+        <p><strong>Fokus:</strong> Vom „Lieferanten“ zum „strategischen Partner“ aufsteigen und Cross-Selling-Potenziale systematisch heben.</p>
+        <p><strong>Core Mindset:</strong> Akquise beginnt nach dem Kauf. Die Wahrscheinlichkeit, an einen Bestandskunden zu verkaufen, ist bis zu 4x höher als bei einem neuen Lead.</p>
     </div>
 
-    <h4>Vermeide diese Fehler bei der Preisnennung:</h4>
-    <ul>
-      <li><strong>Die Entschuldigungshaltung:</strong> „Ich weiß, das ist viel Geld, aber...“ (Zerstört die gefühlte Wertigkeit sofort).</li>
-      <li><strong>Das nackte Preisschild:</strong> „Das System kostet 85.000 €.“ ohne direkte Koppelung an die Ertragsseite.</li>
-    </ul>
-  </div>
-
-  <!-- MODUL 4 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">📊</span>Modul 4: Die COI-Architektur (Cost of Inaction) &amp; ROI-Kalkulation</div>
-    <p>B2B-Entscheider kaufen keine Produkte, sie kaufen Bilanzeffekte. In diesem Modul lernen wir, wie man die *Cost of Inaction* (die Kosten des Nicht-Handelns) so präzise berechnet, dass das Abwarten für den Kunden wirtschaftlich unerträglich wird.</p>
-
-    <h3>Fallstudie: Industrielle Wärmepumpen-Anlage</h3>
-    <p>Ein produzierender Betrieb benötigt eine neue thermische Energieversorgung. Die Investition in das hocheffiziente Realm-System beträgt **150.000 €**. Der Mitbewerber bietet ein Altsystem für **100.000 €** an.</p>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Kostenfaktor (jährlich)</th>
-            <th>Altsystem / Ist-Zustand</th>
-            <th>Realm-System</th>
-            <th>Realm-Vorteil (jährlich)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Energiekosten (Gas/Strom)</strong></td>
-            <td>94.000 €</td>
-            <td>52.000 €</td>
-            <td>+ 42.000 € Ersparnis</td>
-          </tr>
-          <tr>
-            <td><strong>Wartung &amp; CO2-Zertifikate</strong></td>
-            <td>18.000 €</td>
-            <td>6.000 €</td>
-            <td>+ 12.000 € Ersparnis</td>
-          </tr>
-          <tr>
-            <td><strong>Ausfallrisiko (Stillstandszeiten)</strong></td>
-            <td>15.000 € (prognostiziert)</td>
-            <td>2.000 €</td>
-            <td>+ 13.000 € Risikoreduktion</td>
-          </tr>
-          <tr>
-            <td><strong>Gesamteffekt</strong></td>
-            <td><strong>127.000 € / Jahr</strong></td>
-            <td><strong>60.000 € / Jahr</strong></td>
-            <td><strong>+ 67.000 € / Jahr Vorteil</strong></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card">
+        <h2 class="module-title">White-Space-Analyse: Die Durchdringungs-Matrix</h2>
+        <p>Analysiere deine Key Accounts systematisch, um „weiße Flecken“ auf der Landkarte zu identifizieren:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Bereich / Standort</th>
+                    <th>Aktueller Status</th>
+                    <th>Up-Sell Potenzial</th>
+                    <th>Nächster Schritt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Stammwerk</td>
+                    <td>Hauptanlage ✅</td>
+                    <td>IoT-Wartungsmodul</td>
+                    <td>Wartungsvertrag Q3 nutzen</td>
+                </tr>
+                <tr>
+                    <td>Tochtergesellschaft</td>
+                    <td>Keine ❌</td>
+                    <td>Adaption Konzept</td>
+                    <td>Intro via GF anfordern</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <div class="script-box">
-      <div class="script-tag">Wort-für-Wort-Skript: Die COI-Zwinge im Verkaufsgespräch</div>
-      <p>„Herr [Name], der Unterschied in der Erstinvestition zwischen dem Standardsystem und unserer Anlage beträgt exakt 50.000 €. Lassen Sie uns das kurz kaufmännisch betrachten: Durch den energetischen Mehrverbrauch und die CO2-Abgaben entstehen Ihnen mit der Standardlösung Mehrkosten von 67.000 € – und das Jahr für Jahr.</p>
-      <p>Das bedeutet konkret: **Nach bereits 9 Monaten hat sich der Aufpreis komplett amortisiert.** Wenn Sie die Entscheidung für Realm jetzt um nur ein einziges Quartal verschieben, verbrennen Sie rein rechnerisch knapp 16.750 € an vermeidbaren Betriebskosten, die unwiederbringlich verloren sind. Macht es vor diesem Hintergrund Sinn, mit dem Projektstart auch nur eine Woche länger zu warten?“</p>
-    </div>
-  </div>
+    <div class="card">
+        <h2 class="module-title">Strategisches Vorgehen</h2>
+        
+        <h4>1. Das Executive Review Meeting</h4>
+        <div class="script-box">
+            „Ihre Anlage läuft stabil und hat die Effizienzziele um 4 % übertroffen. Um das für Ihre Expansionspläne 2027 proaktiv zu nutzen, schlage ich ein 30-minütiges Review vor, um die Best-Practices auf weitere Standorte zu skalieren. Wann passt es nächste Woche?“
+        </div>
 
-  <div class="nav-btns">
-    <button class="btn" onclick="goSec(0)">← Zurück</button>
-    <button class="btn btn-primary" onclick="goSec(2)">Weiter zu Modul 5 &amp; 6 →</button>
-  </div>
+        <h4>2. Up-Selling durch TCO-Upgrade (Total Cost of Ownership)</h4>
+        <div class="script-box">
+            „Das Upgrade kostet einmalig 15.000 €, reduziert aber durch Stillstandvermeidung die laufenden Kosten um 2.200 € monatlich. Amortisation nach 7 Monaten. Sollen wir das beim nächsten Wartungsfenster mitinstallieren?“
+        </div>
+
+        <h4>3. Die Referenz-Skalierung</h4>
+        <div class="script-box">
+            „Ihr Team in der Logistik spart 18 % Zeit. Lassen Sie uns diesen Best-Practice-Ansatz direkt auf die Produktion ausweiten. Das Schnittstellen-Setup ist bereits fertig – wer ist dort Ihr Ansprechpartner für die Abstimmung?“
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Transfer-Aufgabe</h2>
+        <ul>
+            <li><strong>White-Space-Analyse:</strong> Wähle deine Top-3-Kunden und liste ungenutzte Standorte oder Module auf.</li>
+            <li><strong>Action:</strong> Entwirf die Einladung zum „Executive Review Meeting“ für einen dieser Kunden und versende sie heute noch.</li>
+        </ul>
+    </div>
 </div>
-
-<!-- ══════════════════════════════ SECTION 2 (M5-M6) ══ -->
-<div class="section" id="sec2">
-  <div class="sect-progress"><div class="sect-progress-fill" style="width:75%"></div></div>
-
-  <!-- MODUL 5 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">🎯</span>Modul 5: Abschluss-Trigger &amp; Partnerschaftliche Closing-Techniken</div>
-    <p>Ein künstlicher Drucker-Abschluss („Wenn Sie jetzt nicht unterschreiben, verfällt der Rabatt!“) führt im High-Ticket-B2B-Segment unweigerlich zu massiven Stornierungen, rechtlichen Nachspielen und verbrannter Erde. Wir nutzen stattdessen logische und partnerschaftliche Überleitungen.</p>
-    
-    <h3>Die 3 High-Ticket Closing-Techniken</h3>
-    
-    <h4>1. Der "Logical Next Step" (Die konsequente Weiterführung)</h4>
-    <p>Man fasst die gemeinsam erarbeiteten Fakten zusammen und schlägt den logischen nächsten Schritt als Selbstverständlichkeit vor.</p>
-    <div class="hl hl-blue">
-      <strong>Skript-Muster:</strong> „Herr [Name], wir haben gemeinsam festgestellt, dass die Anlage technisch perfekt in Ihre Werkshalle passt, der ROI bei unter einem Jahr liegt und Ihr Ingenieursteam voll hinter dem Konzept steht. Der logische nächste Schritt ist nun, dass wir die technische Detailplanung fixieren, damit die Komponenten rechtzeitig zur Jahresrevisionspause im Werk sind. Sollen wir den Liefervertrag auf den 1. oder den 15. des Monats terminieren?“
+<!-- Inhalt Modul 5.1: High-Ticket Empfehlungsmarketing -->
+<div id="mod-empfehlung" class="content-section">
+    <div class="card">
+        <h2 class="module-title">Modul 5.1: High-Ticket Empfehlungsmarketing auf C-Level</h2>
+        <p><strong>Fokus:</strong> Empfehlungen als Standard etablieren und warme Top-Leads ohne Kaltakquise generieren.</p>
+        <p><strong>Core Mindset:</strong> B2B-Entscheider helfen sich gegenseitig. Wenn du ein Problem gelöst hast, ist die Empfehlung für den Kunden ein Akt der kollegialen Gefälligkeit – nicht dein Bittsteller-Moment.</p>
     </div>
 
-    <h4>2. Die "Risk-Reversal"-Schleife (Vollständige Risikoumkehr)</h4>
-    <p>Wenn der Kunde kurz vor dem Ziel zögert, liegt es meist an einer unbewussten Rest-Angst vor einer Fehlentscheidung. Wir nehmen dieses Risiko aktiv auf unsere Schultern.</p>
-    <div class="hl hl-blue">
-      <strong>Skript-Muster:</strong> „Ich spüre, dass Sie absolut sicher sein wollen, dass die Software-Schnittstelle reibungslos läuft. Lassen Sie uns Folgendes vereinbaren: Wir verankern im Hauptvertrag eine explizite Klausel: Sollte die Datenanbindung innerhalb der ersten 30 Tage nach Live-Gang nicht die vereinbarte Latenz von unter 50ms liefern, haben Sie ein sofortiges Rücktrittsrecht bei voller Kostenerstattung. Wenn wir dieses Risiko komplett für Sie übernehmen – steht unserem gemeinsamen Projektstart dann noch etwas im Wege?“
-    </div>
-  </div>
-
-  <!-- MODUL 6 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">🛡️</span>Modul 6: Der Umgang mit unerwarteten Last-Minute-Einwänden</div>
-    <p>Es passiert den besten Verkäufern: Alles ist besprochen, der Vertrag liegt auf dem Tisch – und plötzlich wirft der Kunde eine völlig neue Barriere auf. Oft ist dies der sogenannte „Einwand an der Klippe“.</p>
-
-    <h3>Die psychologische Deeskalation</h3>
-    <p>Wenn ein Last-Minute-Einwand kommt, darf der Verkäufer niemals emotional reagieren, die Stimme erheben oder in den Verteidigungsmodus gehen. Das signalisiert Unsicherheit.</p>
-
-    <div class="hl hl-red">
-      <strong>Die 3-Schritt-Methode für Last-Minute-Einwände:</strong>
-      <ol>
-        <li><strong>Auffangen:</strong> Den Einwand absolut emotionslos und ruhig spiegeln („Das ist ein absolut berechtigter Punkt, den Sie da ansprechen.“).</li>
-        <li><strong>Wertschätzung:</strong> Dem Kunden das Gefühl geben, dass es gut ist, dass er diesen Punkt jetzt anspricht.</li>
-        <li><strong>Zurückführen auf das Große Ganze:</strong> Den kleinen Last-Minute-Punkt ins Verhältnis zum bereits bestätigten Gesamt-Mehrwert setzen.</li>
-      </ol>
+    <div class="card">
+        <h2 class="module-title">Das 3-Schritt-Framework</h2>
+        <ol>
+            <li><strong>Magic Moment:</strong> Warte nicht auf den Vertragsschluss, sondern auf den ersten messbaren Erfolg (z.B. nachweisbare Einsparung).</li>
+            <li><strong>Vorab-Targeting:</strong> Screen die LinkedIn-Kontakte des Kunden vor dem Gespräch. Identifiziere 3 Wunsch-Zielpersonen.</li>
+            <li><strong>Geführte Frage:</strong> Übernimm die Denkarbeit für den Kunden. Frage nicht „Kennen Sie wen?“, sondern adressiere konkrete Kontakte.</li>
+        </ol>
     </div>
 
-    <h4>Szenario: „Ich muss da erst noch einmal eine Nacht drüber schlafen.“</h4>
-    <div class="script-box">
-      <div class="script-tag">Wort-für-Wort-Skript: Die "Nacht-drüber-schlafen"-Auflösung</div>
-      <p><strong>Realm-Berater:</strong> „Das verstehe ich vollkommen. Bei einer Investition dieser Tragweite gehört es zu einer exzellenten Führungskraft dazu, besonnen zu entscheiden. Wenn Sie eine Nacht darüber schlafen – worauf genau wollen Sie Ihren Fokus beim Nachdenken legen? Ist es eher die technische Umsetzung oder die wirtschaftliche Amortisation?“</p>
-      <p><strong>Kunde:</strong> „Eigentlich nur, ob mein Team den Umstellungsaufwand nächste Woche neben dem Tagesgeschäft wirklich packt.“</p>
-      <p><strong>Realm-Berater:</strong> „Genau um diesen Punkt zu entlasten, stellen wir Ihnen für die ersten 14 Tage einen unserer Implementierungs-Ingenieure exklusiv ins Haus, der die Hauptlast trägt. Ihr Team wird maximal 2 Stunden für die Einweisung benötigt. Wenn wir diesen Punkt also bereits gelöst haben – worüber genau möchten Sie dann heute Nacht schlafen?“</p>
-    </div>
-  </div>
+    <div class="card">
+        <h2 class="module-title">Elite-Skript & Vorlage</h2>
+        
+        <h4>Das Intro-Skript (Geführte Empfehlung)</h4>
+        <div class="script-box">
+            „Da wir in der Branche spezialisiert darauf sind, diese Effizienzpotenziale zu heben, bin ich über Ihr Netzwerk gestolpert. Ich habe gesehen, dass Sie mit [Name Kontakt] vernetzt sind. Soweit ich weiß, steht deren Werk vor ähnlichen Herausforderungen. Wie ist Ihr Draht zu ihm – tauschen Sie sich da geschäftlich aus?“
+        </div>
 
-  <div class="nav-btns">
-    <button class="btn" onclick="goSec(1)">← Zurück</button>
-    <button class="btn btn-primary" onclick="goSec(3)">Weiter zu Modul 7 &amp; Prüfung →</button>
-  </div>
+        <h4>Schlüsselfertiges E-Mail-Intro (Vorformulierung)</h4>
+        <div class="script-box">
+            <strong>Betreff:</strong> Kurzes Intro / Effizienzsteigerung Produktion<br>
+            „Hallo [Vorname], wir haben bei uns eine extrem starke Lösung für Energiekosten/Rüstzeiten implementiert und die Kosten um 14 % gesenkt. Da ihr vor ähnlichen Herausforderungen steht, dachte ich sofort an dich. Ich habe [Dein Name] hier im CC platziert – ein Austausch lohnt sich definitiv.“
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Transfer-Aufgabe</h2>
+        <ul>
+            <li><strong>Identifikation:</strong> Wähle deinen glücklichsten Bestandskunden mit herausragenden Ergebnissen.</li>
+            <li><strong>Recherche:</strong> Nutze LinkedIn, um 3 Zielkontakte (GF/COO/Werksleiter) aus seinem Netzwerk zu identifizieren.</li>
+            <li><strong>Action:</strong> Diese Liste ist dein Fahrplan für das nächste Review-Meeting!</li>
+        </ul>
+    </div>
 </div>
-
-<!-- ══════════════════════════════ SECTION 3 (M7 + QUIZ) ══ -->
-<div class="section" id="sec3">
-  <div class="sect-progress"><div class="sect-progress-fill" style="width:100%"></div></div>
-
-  <!-- MODUL 7 -->
-  <div class="card">
-    <div class="card-title"><span class="ico">📜</span>Modul 7: Die Sign-On-Architektur (Vom 'Ja' zur rechtsgültigen Unterschrift)</div>
-    <p>Ein mündliches „Ja“ im Termin ist wertvoll, aber noch kein Umsatz. Die Zeitspanne zwischen dem verbalen Einverständnis und der physischen oder digitalen Signatur (z.B. via DocuSign) ist die gefährlichste Phase im B2B-Vertrieb. Hier schlägt der sogenannte **Kaufreue-Effekt (Buyer's Remorse)** zu.</p>
-    
-    <h3>Die Absicherung des Abschlusses</h3>
-    <ul>
-      <li><strong>Keine Zeitfenster offenlassen:</strong> Sätze wie „Ich schicke Ihnen den Vertrag im Laufe der nächsten Woche zu“ sind tödlich. Der Vertrag wird idealerweise noch im Termin vorbereitet oder innerhalb von maximal 2 Stunden digital übermittelt.</li>
-      <li><strong>Die administrative Vorbereitung:</strong> Kläre vorab, wer *rechtlich* zeichnungsberechtigt ist. Braucht es eine zweite Unterschrift (Vier-Augen-Prinzip)? Muss der Einkauf oder die Rechtsabteilung noch eine Standardprüfung machen?</li>
-      <li><strong>Die Post-Closing-Bestätigung:</strong> Dem Kunden sofort nach dem „Ja“ das Gefühl geben, die absolut richtige Entscheidung getroffen zu haben.</li>
-    </ul>
-
-    <div class="hl hl-blue">
-      <strong>Skript-Vorlage zur Kaufreue-Prävention:</strong>
-      <p>„Herr [Name], Gratulation zu dieser zukunftsorientierten Entscheidung. Sie haben damit heute den Grundstein gelegt, um Ihre Energiekosten im Werk ab dem kommenden Quartal massiv zu senken und die CO2-Strafzahlungen komplett zu eliminieren. Ich werde die Unterlagen nun sofort in unserer Rechtsabteilung finalisieren lassen, sodass Sie diese in ca. 30 Minuten digital in Ihrem Posteingang vorfinden. Sobald Sie kurz gegengezeichnet haben, blockieren wir direkt die Produktions-Slots für Ihre Wärmepumpen, damit wir wie besprochen im Zeitplan bleiben.“</p>
-    </div>
-  </div>
-
-  <!-- INTENSIVE QUIZ -->
-  <div class="quiz-box">
-    <h3>⚔️ Realm-Closing-Zertifizierung – Die Abschlussprüfung</h3>
-    <div class="qsub">Umfassende Prüfung über alle 7 Module · Nur 100% fehlerfreie Logik führt zum Bestehen.</div>
-
-    <div class="name-row">
-      <label for="qename">👤 Name des Teilnehmers:</label>
-      <input type="text" id="qename" placeholder="Vor- und Nachname eingeben für das Zertifikat..." autocomplete="name" />
+<!-- Inhalt Modul 6.1: Souveräne Preisverhandlung -->
+<div id="mod-preisverhandlung" class="content-section">
+    <div class="card">
+        <h2 class="module-title">Modul 6.1: Souveräne Preisverhandlung gegen B2B-Einkäufer</h2>
+        <p><strong>Fokus:</strong> Einkäufer-Taktiken entlarven, Marge schützen und den Premium-Preis durchsetzen.</p>
+        <p><strong>Core Mindset:</strong> Verhandlungen mit Profi-Einkäufern sind ein „Theaterstück“. Bleibe ruhig – der Fachbereich hat sich bereits für deine Lösung entschieden.</p>
     </div>
 
-    <!-- Q1 -->
-    <div class="qitem" id="qq1">
-      <div class="qt">1. Ein Kunde äußert im finalen Verkaufsgespräch für eine Industrie-Anlage: „Das System klingt perfekt, aber wir haben aktuell absolut keine Kapazitäten im Team, um uns um die Einführung zu kümmern.“ Wie reagiert der Realm-Closer methodisch korrekt?</div>
-      <button class="qopt" onclick="qpick(this,1,'a')"><span class="qdot"></span>Er argumentiert sofort, dass die Einführung gar nicht so lange dauert und man sich nicht so anstellen solle.</button>
-      <button class="qopt" onclick="qpick(this,1,'b')"><span class="qdot"></span>Er isoliert den Einwand: „Wenn wir die Kapazitäten für einen Moment ausblenden – gäbe es abgesehen davon einen Grund, warum Sie das System nicht einführen würden?“ Um dann per Hebel zu zeigen, dass die Ineffizienz des aktuellen Zustands die eigentliche Ursache für den Zeitmangel ist.</button>
-      <button class="qopt" onclick="qpick(this,1,'c')"><span class="qdot"></span>Er bietet an, das Projekt um 6 Monate zu verschieben, bis das Team wieder mehr Luft hat.</button>
-      <div class="qfb ok" id="qfb1ok">✓ Exzellent! Durch die Isolation trennst du den echten Kern von eventuellen Ausflüchten und nutzt danach die "Cost of Inaction"-Logik: Wer keine Zeit hat, muss Ineffizienzen sofort eliminieren, um wieder Zeit zu gewinnen.</div>
-      <div class="qfb err" id="qfb1err">✗ Falsch. Option A erzeugt Reaktanz und wirkt arrogant. Option C verschiebt das Problem in eine unendliche Pipeline. Richtig ist B.</div>
+    <div class="card">
+        <h2 class="module-title">Konter für die 3 perfidesten Taktiken</h2>
+        
+        <h4>1. Die Salamitaktik</h4>
+        <div class="script-box">
+            „Wir können uns bei den Frachtkosten bewegen, wenn wir das Gesamtpaket neu schnüren. Erhöhen wir im Gegenzug die Anzahlung von 30 % auf 50 %, um unsere Liquidität zu sichern. Sollen wir das Angebot so anpassen?“
+        </div>
+
+        <h4>2. Künstlicher Zeitdruck</h4>
+        <div class="script-box">
+            „Da unsere Kalkulation exakt auf die Anforderungen Ihres Fachbereichs abgestimmt ist, ist kein Spielraum für Rabatt-Runden. Wenn ich den Preis reduziere, müsste ich Qualität streichen – das gefährdet Ihren Produktionserfolg. Wollen wir das Setup abspecken?“
+        </div>
+
+        <h4>3. Das Anker-Prinzip (Utopische Forderungen)</h4>
+        <div class="script-box">
+            „Eine Differenz von 60.000 € lässt sich nicht durch Verhandlungsgeschick erklären, das ist eine andere technologische Liga. Wenn das Budget bei 140.000 € gedeckelt ist, müssen wir das Projekt stoppen und ein neues, leistungsschwächeres Konzept erstellen. Sollen wir das mit Ihrer Produktion abstimmen?“
+        </div>
     </div>
 
-    <!-- Q2 -->
-    <div class="qitem" id="qq2">
-      <div class="qt">2. Welches Ziel verfolgt die "Cost of Inaction" (COI) Argumentation in Modul 4?</div>
-      <button class="qopt" onclick="qpick(this,2,'a')"><span class="qdot"></span>Dem Kunden zu beweisen, dass die Konkurrenz schlechtere Qualität liefert.</button>
-      <button class="qopt" onclick="qpick(this,2,'b')"><span class="qdot"></span>Dem Kunden mathematisch schwarz auf weiß vor Augen zu führen, dass das Beibehalten des aktuellen Zustands pro Monat teurer ist als die Investitions- und Amortisationsrate des neuen Systems.</button>
-      <button class="qopt" onclick="qpick(this,2,'c')"><span class="qdot"></span>Den Preis des Produkts künstlich aufzublähen, um mehr Marge zu erzielen.</button>
-      <div class="qfb ok" id="qfb2ok">✓ Perfekt! B2B-Entscheider handeln nach Zahlen, Daten und Fakten. Wenn das Abwarten jeden Monat 5.000 € kostet, das System aber nur eine Leasingrate von 2.500 € aufruft, ist der Nicht-Kauf eine aktive Geldverbrennung.</div>
-      <div class="qfb err" id="qfb2err">✗ Falsch. COI hat nichts mit dem Schlechtreden von Konkurrenten zu tun und dient auch nicht der Margen-Aufblähung. Es ist die reine betriebswirtschaftliche Logik des Ist-Zustands. Richtig ist B.</div>
+    <div class="card">
+        <h2 class="module-title">Die „Wenn-Dann“-Matrix</h2>
+        <p><strong>Goldene Regel:</strong> Gib niemals einen Rabatt ohne eine Gegenleistung!</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Wenn Einkäufer X will...</th>
+                    <th>...dann fordern wir Y (Gegenleistung)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5 % Nachlass</td>
+                    <td>Wartungsvertrag von 12 auf 36 Monate</td>
+                </tr>
+                <tr>
+                    <td>Preisnachlass</td>
+                    <td>Liefertermin um 4 Wochen nach hinten</td>
+                </tr>
+                <tr>
+                    <td>Skonto</td>
+                    <td>Zahlungseingang innerhalb von 3 Tagen</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Q3 -->
-    <div class="qitem" id="qq3">
-      <div class="qt">3. Sie sind am Ende der Präsentation. Der Kunde hat alle Mehrwerte bestätigt, zögert nun aber schweigend vor dem Vertragsentwurf. Welche Closing-Technik ist anzuwenden?</div>
-      <button class="qopt" onclick="qpick(this,3,'a')"><span class="qdot"></span>Die "Logical Next Step"-Frage formulieren und die administrative Umsetzung (z.B. Lieferzeitfenster oder technischer Kick-off) vorschlagen.</button>
-      <button class="qopt" onclick="qpick(this,3,'b')"><span class="qdot"></span>Aggressiven Druck aufbauen: „Wenn Sie jetzt nicht unterschreiben, ist die Anlage weg.“</button>
-      <button class="qopt" onclick="qpick(this,3,'c')"><span class="qdot"></span>Das Schweigen aussitzen und den Kunden so lange anstarren, bis er aus Unbehagen von selbst unterschreibt.</button>
-      <div class="qfb ok" id="qfb3ok">✓ Großartig! Im gehobenen B2B-Segment führt man den Kunden elegant über die administrative Schwelle. Der "Logical Next Step" wirkt vollkommen natürlich und partnerschaftlich.</div>
-      <div class="qfb err" id="qfb3err">✗ Falsch. Druck (B) zerstört das Vertrauen im B2B sofort. Das reine psychologische Anschweigen (C) kann in manchen Consumer-Märkten funktionieren, wirkt bei professionellen Geschäftsführern jedoch plump. Richtig ist A.</div>
+    <div class="card">
+        <h2 class="module-title">Transfer-Aufgabe</h2>
+        <ul>
+            <li><strong>Walk-Away-Point:</strong> Definiere für dein nächstes Gespräch dein absolut unterstes Limit.</li>
+            <li><strong>Strategie:</strong> Bereite 3 „Wenn-Dann“-Gegenforderungen vor, bevor du den Verhandlungsraum betrittst.</li>
+        </ul>
     </div>
-
-    <!-- Q4 -->
-    <div class="qitem" id="qq4">
-      <div class="qt">4. Was versteht man unter dem Begriff "Buyer's Remorse" in Modul 7 und wie verhindert man ihn aktiv?</div>
-      <button class="qopt" onclick="qpick(this,4,'a')"><span class="qdot"></span>Die Reue des Verkäufers, das Produkt zu billig abgegeben zu haben. Man verhindert sie durch nachträgliche Preiserhöhungen.</button>
-      <button class="qopt" onclick="qpick(this,4,'b')"><span class="qdot"></span>Den Kaufreue-Effekt des Kunden direkt nach dem verbalen 'Ja'. Man verhindert ihn durch sofortige digitale Übermittlung des Vertrags und eine Bestätigung der strategischen Vorteile (Post-Closing).</button>
-      <button class="qopt" onclick="qpick(this,4,'c')"><span class="qdot"></span>Ein juristischer Begriff für Mängelgewährleistung.</div>
-      <div class="qfb ok" id="qfb4ok">✓ Absolut korrekt! Sobald der Kunde „Ja“ sagt, beginnt sein Gehirn oft, Risiken hochzurechnen. Wer hier tagelang mit dem Vertrag wartet, riskiert, dass der Deal intern gecancelt wird. Schnelligkeit und mentale Bestätigung sichern den Erfolg.</div>
-      <div class="qfb err" id="qfb4err">✗ Falsch. Buyer's Remorse betrifft immer den Käufer, der kurz nach der Entscheidung kalte Füße bekommt. Antwort B ist der einzige professionelle Schutzmechanismus.</div>
-    </div>
-
-    <!-- SCORE BOX -->
-    <div class="quiz-score" id="qscorebox">
-      <div class="qs-val" id="qscoreval">0 / 4</div>
-      <div class="qs-lbl" id="qscorelbl">Prüfungsergebnis</div>
-      <div id="qscoretext" style="margin-top:10px; font-weight:700; font-size:15px"></div>
-    </div>
-  </div>
-
-  <!-- FOOTER NAV -->
-  <div class="nav-btns">
-    <button class="btn" onclick="goSec(2)">← Zurück</button>
-    <div></div>
-  </div>
 </div>
+<!-- Inhalt Modul 7.1: Pipeline-Management & Umsatz-Planung -->
+<div id="mod-pipeline" class="content-section">
+    <div class="card">
+        <h2 class="module-title">Modul 7.1: B2B-Pipeline-Management & Mathematik</h2>
+        <p><strong>Fokus:</strong> Deal-Wahrscheinlichkeiten berechnen, „Karteileichen“ eliminieren, Umsatzziele punktlanden.</p>
+        <p><strong>Core Mindset:</strong> Schnelles „Nein“ ist besser als ein langsames „Vielleicht“. Die Pipeline lügt nicht, wenn man sie mathematisch betrachtet.</p>
+    </div>
 
+    <div class="card">
+        <h2 class="module-title">Pipeline-Metrik (Gewichtung)</h2>
+        <p>Der reale Wert eines Deals = <em>Angebotswert × Wahrscheinlichkeit</em>.</p>
+        <ul>
+            <li><strong>10 %:</strong> Erstkontakt / Qualifiziert</li>
+            <li><strong>30 %:</strong> Konzept eingereicht</li>
+            <li><strong>60 %:</strong> Angebot verhandelt & isoliert</li>
+            <li><strong>90 %:</strong> Finale Abstimmung</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Das „Break-up-E-Mail“-Protokoll</h2>
+        <p><em>Trigger: Psychologische Verlustangst.</em></p>
+        <div class="script-box">
+            „Da ich in den letzten zwei Wochen nichts gehört habe, gehe ich davon aus, dass das Projekt aktuell keine Relevanz hat. Ich werde den Vorgang vorerst auf 'inaktiv' setzen und die reservierten Kapazitäten freigeben. Sollte es später wieder aktuell werden, können wir gerne neu anknüpfen.“
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Mathematischer Vertriebs-Fahrplan</h2>
+        <p>Rechne dein Ziel rückwärts: <strong>Umsatz ➔ Deals ➔ Angebote ➔ Erstgespräche ➔ Kaltkontakte.</strong></p>
+        <p><em>Beispiel (für 500.000 € Ziel):</em></p>
+        <ul>
+            <li>10 Abschlüsse bei 50.000 € Ø-Deal.</li>
+            <li>40 Angebote (bei 25 % Quote).</li>
+            <li>80 Erstgespräche (bei 50 % Präsentationsquote).</li>
+            <li>400 Kontakte (bei 20 % Erreichbarkeit).</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="module-title">Transfer-Aufgabe</h2>
+        <ul>
+            <li><strong>CRM-Inventur:</strong> Alle Deals > 60 Tage ohne Kontakt erhalten heute die „Break-up-E-Mail“.</li>
+            <li><strong>KPI-Check:</strong> Berechne deine tägliche Kontakt-Quote, die du benötigst, um deine Umsatzziele mathematisch zu garantieren.</li>
+        </ul>
+    </div>
+</div>
+<!-- START: DAS FINALE - ZERTIFIZIERUNGS-QUIZ -->
+<div id="mod-quiz" class="content-section" style="margin-top: 40px; padding: 30px; background: #fff; border-radius: 12px; border: 2px solid #0B3D6B;">
+    <h2 class="module-title" style="color: #0B3D6B;">🏆 Das B2B-Masterclass Zertifizierungs-Quiz</h2>
+    <p>Bitte trage deinen vollständigen Namen ein und beantworte alle 20 Fragen. Bei mehr als 3 Fehlern ist das Quiz nicht bestanden.</p>
+    
+    <input type="text" id="userName" placeholder="Vollständiger Name des Teilnehmers" style="width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+
+    <div id="quizForm">
+        <!-- Fragen werden via JS geladen -->
+    </div>
+
+    <button onclick="evaluateQuiz()" style="width: 100%; padding: 15px; background: #1A6B4A; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold;">Quiz einreichen & Ergebnis senden</button>
 </div>
 
 <script>
-// NAVIGATION SYSTEM
-const sections = document.querySelectorAll('.section');
-const navItems = document.querySelectorAll('.nav-item');
+    const questions = [
+        { q: "1. Bei 20% Preisdifferenz des Mitbewerbers, wie reagierst du?", o: ["Rabatt geben", "TCO/Betriebskosten hinterfragen", "Qualität lang erklären"], a: 1 },
+        { q: "2. Was ist der Kardinalfehler bei der Empfehlungsfrage?", o: ["Vage Fragen wie 'Kennen Sie wen?'", "Zu langes Warten", "Zu direktes Vorgehen"], a: 0 },
+        { q: "3. Was verhindert 'Ghosting' nach einem Angebot?", o: ["Automatisierte Follow-ups", "Fixer Folgetermin bei Angebotserstellung", "Lange Angebote"], a: 1 },
+        { q: "4. Was tun bei 'Budget eingefroren'?", o: ["Ratenzahlung anbieten", "Einwand isolieren", "Warten"], a: 1 },
+        { q: "5. Ziel der 'Break-up-E-Mail'?", o: ["Psychologische Verlustangst nutzen", "Kunden beleidigen", "CRM pflegen"], a: 0 },
+        { q: "6. Höchste Stufe im Key Account Management?", o: ["Lieferant", "Bevorzugter Anbieter", "Strategischer Partner"], a: 2 },
+        { q: "7. Reaktion auf die Salamitaktik?", o: ["Zustimmen", "Paket-Prinzip (Gegenleistung fordern)", "Abbruch"], a: 1 },
+        { q: "8. Was bedeutet L-A-E-V?", o: ["Lauschen, Anerkennen, Ergründen, Verändern", "Laden, Abwarten, Erklären, Verkaufen", "Listen, Argumentieren, Einwand, Vorwand"], a: 0 },
+        { q: "9. Wann ist der 'Magic Moment' für Empfehlungen?", o: ["Bei Unterschrift", "Nach messbarem Erfolg/Einsparung", "Beim Erstgespräch"], a: 1 },
+        { q: "10. Reaktion auf utopische Preis-Anker?", o: ["Gegenangebot", "Disqualifikation als unrealistisch", "Mittelweg"], a: 1 },
+        { q: "11. Wie berechnet man den realen Deal-Wert?", o: ["Listenpreis", "Angebotswert × Wahrscheinlichkeit", "Durchschnittswert"], a: 1 },
+        { q: "12. Wenn-Dann-Formel bei Preisnachlass?", o: ["Gegenleistung fordern", "Vorkasse akzeptieren", "Späteren Rabatt versprechen"], a: 0 },
+        { q: "13. Warum kein 'Drücken' im B2B?", o: ["Gesetz", "Verlust der Glaubwürdigkeit", "Anstrengung"], a: 1 },
+        { q: "14. Up-Sell Chance bei Bestandskunden?", o: ["5-20%", "60-70%", "90%"], a: 1 },
+        { q: "15. Reaktion bei Zeitdruck (Deadline durch Einkäufer)?", o: ["Zustimmen", "Souverän ablehnen/Qualität betonen", "Anrufen"], a: 1 },
+        { q: "16. Sinn der White-Space-Analyse?", o: ["Neukunden finden", "Potenziale im Key Account finden", "Verträge kündigen"], a: 1 },
+        { q: "17. Ziel eines Executive Review Meetings?", o: ["Kaffeeklatsch", "Performance-Skalierung", "Preisrunde"], a: 1 },
+        { q: "18. Größter Hebel für Umsatz?", o: ["Kaltakquise", "Folgetermine bei allen Angeboten", "Visitenkarten"], a: 1 },
+        { q: "19. Ziel des 'Implementation Blueprint'-Closing?", o: ["Zukunft fokussieren", "Schnelles Geld", "Vertragsabschluss"], a: 0 },
+        { q: "20. Benötigte Kontakte für 500k Umsatz (Beispiel)?", o: ["2", "10", "50"], a: 1 }
+    ];
 
-function goSec(idx) {
-  sections.forEach((s, i) => {
-    if(i === idx) {
-      s.classList.add('active');
-      navItems[i].classList.add('active');
-      navItems[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    } else {
-      s.classList.remove('active');
-      navItems[i].classList.remove('active');
-    }
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// QUIZ ENGINE
-const userAnswers = {};
-const correctAnswers = { 1: 'b', 2: 'b', 3: 'a', 4: 'b' };
-
-function qpick(btn, qNum, option) {
-  const parent = document.getElementById('qq' + qNum);
-  const options = parent.querySelectorAll('.qopt');
-  
-  options.forEach(opt => opt.classList.add('locked'));
-  
-  userAnswers[qNum] = option;
-  
-  const isCorrect = option === correctAnswers[qNum];
-  if(isCorrect) {
-    btn.classList.add('correct');
-    document.getElementById('qfb' + qNum + 'ok').classList.add('show');
-  } else {
-    btn.classList.add('wrong');
-    document.getElementById('qfb' + qNum + 'err').classList.add('show');
-    options.forEach(opt => {
-      if(opt.getAttribute('onclick').includes(`'${correctAnswers[qNum]}'`)) {
-        opt.classList.add('correct');
-      }
+    const form = document.getElementById('quizForm');
+    questions.forEach((item, i) => {
+        let optionsHtml = item.o.map((opt, oIdx) => 
+            `<div style="margin: 5px 0;"><label><input type="radio" name="q${i}" value="${oIdx}"> ${opt}</label></div>`
+        ).join('');
+        form.innerHTML += `<div class="question" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;"><strong>${item.q}</strong><div class="options">${optionsHtml}</div></div>`;
     });
-  }
-  
-  checkQuizScore();
-}
 
-function checkQuizScore() {
-  const answeredCount = Object.keys(userAnswers).length;
-  if(answeredCount === 4) {
-    let score = 0;
-    for(let q in correctAnswers) {
-      if(userAnswers[q] === correctAnswers[q]) score++;
+    function evaluateQuiz() {
+        let score = 0;
+        let name = document.getElementById('userName').value;
+        if (!name) { alert("Bitte Namen eintragen!"); return; }
+
+        questions.forEach((item, i) => {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected && parseInt(selected.value) === item.a) score++;
+        });
+
+        if ((20 - score) <= 3) {
+            alert("Herzlichen Glückwunsch " + name + "! Mit " + score + "/20 Punkten bestanden.");
+            window.location.href = "mailto:m.christel@realm-europe.de?subject=Zertifizierung B2B Abschluss-Meisterschaft&body=Teilnehmer: " + name + "%0D%0AErgebnis: " + score + "/20 Punkte.";
+        } else {
+            alert("Nicht bestanden (" + score + "/20 Punkten). Bitte die Module wiederholen.");
+        }
     }
-    
-    const scoreBox = document.getElementById('qscorebox');
-    const scoreVal = document.getElementById('qscoreval');
-    const scoreText = document.getElementById('qscoretext');
-    const name = document.getElementById('qename').value.trim() || 'Zukünftiger Master-Closer';
-    
-    scoreVal.innerText = score + " / 4";
-    scoreBox.classList.add('show');
-    
-    if(score === 4) {
-      scoreText.innerHTML = `🏆 Herausragend, ${name}! Du hast die Value-Closing Zertifizierung mit der Bestnote von 100% BESTANDEN! Du bist nun offiziell qualifiziert, komplexe B2B-Deals auf Enterprise-Niveau souverän abzuschließen.`;
-      scoreText.style.color = "var(--green-dark)";
-    } else if(score >= 3) {
-      scoreText.innerHTML = `🎉 Gut gemacht, ${name}! Du hast die Prüfung bestanden. Schau dir die verfehlten Punkte noch einmal kurz an, um die absolute Perfektion zu erreichen.`;
-      scoreText.style.color = "var(--green-mid)";
-    } else {
-      scoreText.innerHTML = `⚠️ Zertifizierung nicht bestanden, ${name}. Für das High-Ticket Segment müssen die psychologischen Mechanismen fehlerfrei sitzen. Setze die Abschnitte zurück und versuche es erneut!`;
-      scoreText.style.color = "var(--red)";
-    }
-  }
-}
 </script>
+<!-- ENDE: DAS FINALE - ZERTIFIZIERUNGS-QUIZ -->
 </body>
 </html>
